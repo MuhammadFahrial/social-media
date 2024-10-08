@@ -1,0 +1,47 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "username":"user",
+  "email":"user@gmail.com",
+  "password":"12345",
+  "confPassword":"12345",
+  "role":"user"
+}
+
+###
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "email": "user@gmail.com",
+    "password": "12345"
+}
+
+###
+GET http://localhost:5000/v1/users
+
+###
+GET http://localhost:5000/v1/posts
+
+###
+POST http://localhost:5000/v1/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzcyMTIwLCJleHAiOjE3MjgzNzM5MjB9.eaAWeAImlfTIy85thpzkkk8Papd6rXpPPYJ6jSynJTw
+
+{
+    "body": "  "
+}
+
+###
+POST http://localhost:5000/v1/posts/comments/6703e5a7dc33d3122ed7e0e4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzczOTgyLCJleHAiOjE3MjgzNzU3ODJ9.6i9f2XoNRggwwYoEtCKv27sZZD99ZTRLjFOHdJuOoHw
+
+{
+  "body":"comment from user"
+}
+
+###
+DELETE http://localhost:5000/v1/posts/6703e5a7dc33d3122ed7e0e4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzEwMDA5LCJleHAiOjE3MjgzMTE4MDl9.QPdMAfVR1lrPrnLo-rXE8jJKuH45C9U7MnbnxBw8qqU
