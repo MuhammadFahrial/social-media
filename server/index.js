@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import AuthRoute from "./routes/AuthRoutes.js";
 import PostsRoute from "./routes/PostsRoutes.js";
+import CommentsRoute from "./routes/CommentRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use(AuthRoute);
 app.use(PostsRoute);
+app.use(CommentsRoute);
 
 const port = process.env.PORT;
 app.listen(port, () => {

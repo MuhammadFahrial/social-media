@@ -10,14 +10,7 @@ const Posts = new Schema({
   },
   author: { type: String, required: true },
   body: { type: String, required: true },
-  comments: [
-    {
-      body: String,
-      date: Date,
-      author: { type: String, required: true },
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
-    },
-  ],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
   date: { type: Date, default: Date.now },
 });
 

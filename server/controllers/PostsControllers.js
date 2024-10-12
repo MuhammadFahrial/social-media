@@ -2,40 +2,13 @@ import Posts from "../models/PostsModels.js";
 
 export const getPosts = async (req, res) => {
   try {
-    const response = await Posts.find().select("author body comments");
+    const response = await Posts.find()
+      .select("author body comments")
+      .populate({
+        path: "comments",
+        select: "body author",
+      });
     res.status(200).json(response);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const createComments = async (req, res) => {
-  const { body } = req.body;
-
-  if (!body || body.trim().length < 1)
-    return res.status(400).json({ msg: "Cannot send this comment" });
-
-  try {
-    const post = await Posts.findByIdAndUpdate(
-      req.params.id,
-      {
-        $push: {
-          comments: {
-            userId: req.userId,
-            author: req.username,
-            body: body,
-            date: Date.now(),
-          },
-        },
-      },
-      { new: true }
-    ).select("body date");
-
-    if (!post) {
-      return res.status(404).json({ msg: "Post tidak ditemukan" });
-    }
-
-    res.status(200).json({ msg: "Comment successfully added" });
   } catch (error) {
     console.log(error.message);
   }

@@ -14,34 +14,55 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "email": "user@gmail.com",
+    "email": "admin@gmail.com",
     "password": "12345"
 }
 
 ###
 GET http://localhost:5000/v1/users
 
-###
+
+### POSTS
 GET http://localhost:5000/v1/posts
 
 ###
 POST http://localhost:5000/v1/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzcyMTIwLCJleHAiOjE3MjgzNzM5MjB9.eaAWeAImlfTIy85thpzkkk8Papd6rXpPPYJ6jSynJTw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
 
 {
-    "body": "  "
-}
-
-###
-POST http://localhost:5000/v1/posts/comments/6703e5a7dc33d3122ed7e0e4
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzczOTgyLCJleHAiOjE3MjgzNzU3ODJ9.6i9f2XoNRggwwYoEtCKv27sZZD99ZTRLjFOHdJuOoHw
-
-{
-  "body":"comment from user"
+    "body": "Post by Admin 1"
 }
 
 ###
 DELETE http://localhost:5000/v1/posts/6703e5a7dc33d3122ed7e0e4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzEwMDA5LCJleHAiOjE3MjgzMTE4MDl9.QPdMAfVR1lrPrnLo-rXE8jJKuH45C9U7MnbnxBw8qqU
+
+
+### COMMENTS
+GET http://localhost:5000/v1/comments
+
+###
+GET http://localhost:5000/v1/comments/67078a152d8a50aac7268487
+
+###
+POST http://localhost:5000/v1/comments/6708c6a0bd56f26a5db6cfca
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
+
+{
+  "body":"comments By admin 1" 
+}
+
+###
+DELETE http://localhost:5000/v1/comments/6708c6bebd56f26a5db6cfcd
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
+
+###
+PATCH http://localhost:5000/v1/comments/6708c6bebd56f26a5db6cfcd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjczMTcsImV4cCI6MTcyODYyOTExN30.IhRGhZzeqbu46MpXECSIuTnAXq65IiuWWIfYOHU9DGc
+
+{
+  "body":"comments by admin 1 updateeeee"
+}

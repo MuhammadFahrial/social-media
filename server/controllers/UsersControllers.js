@@ -8,7 +8,7 @@ export const Register = async (req, res) => {
   if (password != confPassword) {
     return res
       .status(400)
-      .json({ msg: "Password dan konfirmasi password tidak sama" });
+      .json({ msg: "Password and confirm password not same" });
   }
   const hashPassword = await argon2.hash(password);
 
@@ -22,7 +22,7 @@ export const Register = async (req, res) => {
       password: hashPassword,
       role: role,
     });
-    res.status(200).json({ msg: "Registrasi berhasil" });
+    res.status(200).json({ msg: "Registration success" });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }
@@ -32,15 +32,14 @@ export const Login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await Users.findOne({ email: email });
-    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+    if (!user) return res.status(404).json({ msg: "User not found" });
     const match = await argon2.verify(user.password, password);
-    if (!match) return res.status(400).json({ msg: "Password salah" });
+    if (!match) return res.status(400).json({ msg: "Wrong password" });
 
     const accessToken = jwt.sign(
       {
-        userId: user.id,
+        id: user.id,
         username: user.username,
-        email: user.email,
         role: user.role,
       },
       process.env.JWT_SECRET,
@@ -54,13 +53,13 @@ export const Login = async (req, res) => {
     });
     res.status(200).json({ accessToken });
   } catch (error) {
-    res.status(404).json({ msg: "User tidak di temukan" });
+    res.status(404).json({ msg: "User not found" });
   }
 };
 
 export const Logout = async (req, res) => {
   res.clearCookie("token");
-  res.status(200).json({ msg: "Berhasil Logout" });
+  res.status(200).json({ msg: "Logout success" });
 };
 
 export const getUsers = async (req, res) => {
