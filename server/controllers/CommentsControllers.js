@@ -28,6 +28,10 @@ export const createComments = async (req, res) => {
 
   if (!body || body.trim().length < 1)
     return res.status(400).json({ msg: "Cannot send this comment" });
+
+  const post = await Posts.findById(req.params.id);
+  if (!post) return res.status(404).json({ msg: "Post not found" });
+
   try {
     const comments = await Comments.create({
       body,

@@ -28,15 +28,15 @@ GET http://localhost:5000/v1/posts
 ###
 POST http://localhost:5000/v1/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg4NzU3ODEsImV4cCI6MTcyODg3NzU4MX0.Ow0Haa2bzZyBcghZIOPS8yYgAKMF7gQSQIT2chBE040
 
 {
     "body": "Post by Admin 1"
 }
 
 ###
-DELETE http://localhost:5000/v1/posts/6703e5a7dc33d3122ed7e0e4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAzY2M2NGI3OTUzY2NhY2ZiYTBkMDciLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzI4MzEwMDA5LCJleHAiOjE3MjgzMTE4MDl9.QPdMAfVR1lrPrnLo-rXE8jJKuH45C9U7MnbnxBw8qqU
+DELETE http://localhost:5000/v1/posts/670c8e338f330b59346e8784
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg4NzU3ODEsImV4cCI6MTcyODg3NzU4MX0.Ow0Haa2bzZyBcghZIOPS8yYgAKMF7gQSQIT2chBE040
 
 
 ### COMMENTS
@@ -46,16 +46,16 @@ GET http://localhost:5000/v1/comments
 GET http://localhost:5000/v1/comments/67078a152d8a50aac7268487
 
 ###
-POST http://localhost:5000/v1/comments/6708c6a0bd56f26a5db6cfca
+POST http://localhost:5000/v1/comments/670c92abb9a3ce7dfcdbf0e8
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDNjYzY0Yjc5NTNjY2FjZmJhMGQwNyIsInVzZXJuYW1lIjoidXNlciIsInJvbGUiOiJ1c2VycyIsImlhdCI6MTcyODg3NTU3OSwiZXhwIjoxNzI4ODc3Mzc5fQ.pt7hDXmz96Cw_sS53CoQs2gcMf6Z9t0SAmZckO_9s-c
 
 {
-  "body":"comments By admin 1" 
+  "body":"comments By user 1" 
 }
 
 ###
-DELETE http://localhost:5000/v1/comments/6708c6bebd56f26a5db6cfcd
+DELETE http://localhost:5000/v1/comments/6708c6a0bd56f26a5db6cfca
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDM1OTJmOTU4ODlmNjQ0YjhjMDZiNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mjg2MjgzNzQsImV4cCI6MTcyODYzMDE3NH0.5frHIMg5zSYsvfO86k2fu9TkZhEZmjQdI3_R820qqLY
 
 ###

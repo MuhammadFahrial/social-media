@@ -1,14 +1,13 @@
 import Posts from "../models/PostsModels.js";
+import Comments from "../models/CommentsModels.js";
 
 export const getPosts = async (req, res) => {
   try {
-    const response = await Posts.find()
-      .select("author body comments")
-      .populate({
-        path: "comments",
-        select: "body author",
-      });
-    res.status(200).json(response);
+    const post = await Posts.find().select("author body comments").populate({
+      path: "comments",
+      select: "body author",
+    });
+    res.status(200).json({ post });
   } catch (error) {
     console.log(error.message);
   }
@@ -65,6 +64,7 @@ export const deletePosts = async (req, res) => {
     }
 
     await Posts.findByIdAndDelete(req.params.id);
+    await Comments.deleteMany({ postId: req.params.id });
     res.status(200).json({ msg: "Post deleted" });
   } catch (error) {
     console.log(error.message);
