@@ -26,7 +26,7 @@ export const createPosts = async (req, res) => {
       body,
     });
 
-    res.status(200).json({ msg: "Post uploaded" });
+    res.status(201).json({ msg: "Post uploaded" });
   } catch (error) {
     console.log(error.message);
   }
@@ -47,7 +47,7 @@ export const updatePosts = async (req, res) => {
         runValidators: true,
       }
     );
-    res.status(200).json({ msg: "Update post succesfully" });
+    res.status(201).json({ msg: "Update post succesfully" });
   } catch (error) {
     console.log(error.message);
   }

@@ -22,7 +22,7 @@ export const Register = async (req, res) => {
       password: hashPassword,
       role: role,
     });
-    res.status(200).json({ msg: "Registration success" });
+    res.status(201).json({ msg: "Registration success" });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }
@@ -68,5 +68,31 @@ export const getUsers = async (req, res) => {
     res.status(200).json(response);
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const getUsersById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await Users.findById(id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ msg: "Error fetching users", error: error.message });
+  }
+};
+
+export const getUsersByUsername = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await Users.findOne({ username: username });
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ msg: "Error fetching users", error: error.message });
   }
 };
