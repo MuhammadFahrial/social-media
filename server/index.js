@@ -15,6 +15,9 @@ const app = express();
 connectDB();
 const port = process.env.PORT;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -40,9 +43,38 @@ app.post("/image-upload", upload.single("image"), async (req, res) => {
   }
 });
 
+// Delete an image from uploads
+app.delete("/delete-image", async (req, res) => {
+  const { imageUrl } = req.query;
+
+  if (!imageUrl) {
+    return res
+      .status(400)
+      .json({ error: true, message: "ImageUrl parameter is required" });
+  }
+
+  try {
+    // Extract the filename from imageUrl
+    const filename = path.basename(imageUrl);
+
+    // Define the file path
+    const filePath = path.join(__dirname, "uploads", filename);
+
+    // Check if the file exist
+    if (fs.existsSync(filePath)) {
+      // Delete the from the uploads folder
+      fs.unlinkSync(filePath);
+      res.status(200).json({ message: "Image delete successfully" });
+    } else {
+      res.status(200).json({ error: true, message: "Image not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: true, message: error.message });
+  }
+});
+
 // serve static files from the uploads and assets directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(port, () => {

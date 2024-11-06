@@ -88,7 +88,7 @@ export const getUsersByUsername = async (req, res) => {
   const { username } = req.params;
 
   try {
-    const user = await Users.findOne({ username: username });
+    const user = await Users.findOne({ username: username }).select("username");
     if (!user) return res.status(404).json({ msg: "User not found" });
     res.status(200).json(user);
   } catch (error) {

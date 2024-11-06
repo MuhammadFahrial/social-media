@@ -10,8 +10,9 @@ const Posts = new Schema({
   },
   author: { type: String, required: true },
   body: { type: String, required: true },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
+  imageUrl: { type: String },
   date: { type: Date, default: Date.now },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
 });
 
 export default mongoose.model("Posts", Posts);
