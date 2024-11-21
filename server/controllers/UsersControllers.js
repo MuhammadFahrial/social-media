@@ -5,6 +5,20 @@ import argon2 from "argon2";
 export const Register = async (req, res) => {
   const { username, email, password, confPassword } = req.body;
 
+  const usernameCheck = await Users.findOne({ username: username });
+  if (usernameCheck)
+    return res.status(409).json({
+      msg: "Username already taken. Please choose a different username",
+    });
+
+  const emailCheck = await Users.findOne({ email: email });
+  if (emailCheck)
+    return res.status(409).json({
+      msg: "Email already taken. Please choose a different email",
+    });
+
+  if (!password) return res.status(400).json({ msg: "Require password" });
+
   if (password != confPassword) {
     return res
       .status(400)
@@ -30,8 +44,16 @@ export const Register = async (req, res) => {
 
 export const Login = async (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || email.trim().length < 1)
+    return res.status(400).json({ msg: "Require email" });
+
+  if (!password || password.trim().length < 1)
+    return res.status(400).json({ msg: "Require password" });
+
   try {
     const user = await Users.findOne({ email: email });
+
     if (!user) return res.status(404).json({ msg: "User not found" });
     const match = await argon2.verify(user.password, password);
     if (!match) return res.status(400).json({ msg: "Wrong password" });

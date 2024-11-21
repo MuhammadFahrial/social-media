@@ -9,7 +9,17 @@ export const getPosts = async (req, res) => {
         path: "comments",
         select: "body author",
       });
-    res.status(200).json({ post });
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const getPostsById = async (req, res) => {
+  try {
+    const post = await Posts.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: "Post not found" });
+    res.status(200).json(post);
   } catch (error) {
     console.log(error.message);
   }
@@ -36,20 +46,16 @@ export const createPosts = async (req, res) => {
 };
 
 export const updatePosts = async (req, res) => {
+  const { body } = req.body;
+
   try {
     const post = await Posts.findById(req.params.id);
     if (!post) return res.status(404).json({ msg: "Post not found" });
     if (post.userId.toString() != req.userId) return res.sendStatus(403);
-    await Posts.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body.body,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
+
+    post.body = body;
+    await post.save();
+
     res.status(201).json({ msg: "Update post succesfully" });
   } catch (error) {
     console.log(error.message);
