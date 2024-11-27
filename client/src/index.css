@@ -7,6 +7,12 @@ html {
 }
 * {
   box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+}
+
+.bg-container {
+  background-color: #fafafa;
 }
 
 /* START LOGIN AND REGISTER */
@@ -149,11 +155,11 @@ html {
 .sidebar {
   background-color: #66afe9;
   width: 20%;
-  
 }
 
 .main-content {
-  background-color: #04aa6d;
+  /* background-color: #04aa6d; */
+  /* height: 100vh; */
   flex: 1;
 }
 
@@ -162,3 +168,128 @@ html {
   width: 20%;
 }
 /* END HOME */
+
+/* START FORM */
+.form-post {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 2px solid rgba(201, 201, 201, 0.2);
+  border-radius: 10px;
+  margin: 0 6rem;
+}
+
+.input-form-post {
+  padding: 1rem;
+  flex: 1;
+  border: none;
+}
+
+.input-form-post:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+
+.form-btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  cursor: pointer;
+  margin: 1rem;
+  border-radius: 6px;
+}
+/* END FORM */
+
+/* START POST */
+.post-style {
+  padding: 0.8rem 1rem;
+  margin: 1rem 6rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid rgba(201, 201, 201, 0.2);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.post-img {
+  width: 2rem;
+  height: 2rem;
+  /* background-color: rgb(187, 187, 187); */
+  /* padding: 6px; */
+  border-radius: 6px;
+}
+
+.post-author {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.post-style p {
+  color: #414141;
+}
+
+.post-comment-icon {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.post-comment-icon img {
+  height: 1.5rem;
+}
+
+.post-comment {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.post-comment p {
+  font-size: 0.8rem;
+}
+
+/* START FORM COMMENT */
+.form-comment {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  /* background-color: #66afe9; */
+  margin: 0.4rem 0;
+}
+
+.form-input-comment {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#comment {
+  padding: 0.6rem 0.8rem;
+  border: none;
+  background-color: #fafafa;
+  flex: 1;
+}
+#comment:focus {
+  border: none;
+  outline: none;
+}
+
+.form-input-comment button {
+  border: none;
+  cursor: pointer;
+  background-color: #fafafa;
+  padding: 0 0.8rem;
+}
+
+.comment {
+  border: 1px solid;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+}
+
+/* END FORM COMMENT */
+/* END POST */

@@ -31,15 +31,17 @@ const DetailPosts = () => {
 
   return (
     <Layout>
-      <h1>{author}</h1>
-      <p>{body}</p>
-      <div>
-        {comments.map((comment, index) => (
-          <div key={index}>
-            <p>{comment.author}</p>
-            <p>{comment.body}</p>
-          </div>
-        ))}
+      <div className="post-style main-conten">
+        <h1>{author}</h1>
+        <p>{body}</p>
+        <div>
+          {comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <p>{comment.author}</p>
+              <p>{comment.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </Layout>
   );

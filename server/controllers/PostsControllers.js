@@ -8,7 +8,8 @@ export const getPosts = async (req, res) => {
       .populate({
         path: "comments",
         select: "body author",
-      });
+      })
+      .sort("-date");
     res.status(200).json(post);
   } catch (error) {
     console.log(error.message);
