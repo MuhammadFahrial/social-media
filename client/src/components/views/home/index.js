@@ -79,11 +79,11 @@ const Home = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="post-content">
         {/*START FORM INPUT */}
         <div>
           <form onSubmit={addPost} className="form-post">
-            <input
+            <textarea
               className="input-form-post"
               type="text"
               placeholder="What's on your mind"

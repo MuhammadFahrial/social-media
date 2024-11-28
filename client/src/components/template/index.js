@@ -5,9 +5,9 @@ import SideBar from "../sidebar";
 const Layout = ({ children }) => {
   return (
     <div className="bg-container">
-      <header>
-        <Navbar />
-      </header>
+      {/* <header> */}
+        {/* <Navbar /> */}
+      {/* </header> */}
       <div className="home">
         <div className="sidebar">
           <SideBar />
