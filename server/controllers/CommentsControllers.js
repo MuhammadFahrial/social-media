@@ -14,7 +14,7 @@ export const getCommentByPostId = async (req, res) => {
   const { postId } = req.params;
 
   try {
-    const comments = await Comments.find({ postId });
+    const comments = await Comments.find({ postId }).sort("-date");
     if (!comments) return res.status(404).json({ msg: "Comment not found" });
 
     res.status(200).json({ comments });

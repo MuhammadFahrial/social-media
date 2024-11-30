@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../header";
 import SideBar from "../sidebar";
+import Info from "../info";
 
 const Layout = ({ children }) => {
   return (
     <div className="bg-container">
       {/* <header> */}
-        {/* <Navbar /> */}
+      {/* <Navbar /> */}
       {/* </header> */}
       <div className="home">
         <div className="sidebar">
@@ -15,7 +16,9 @@ const Layout = ({ children }) => {
         <div className="main-content">
           <main>{children}</main>
         </div>
-        <div className="right-side">Right-Side</div>
+        <div className="right-side">
+          <Info />
+        </div>
       </div>
       {/* <footer>this is footer</footer> */}
     </div>

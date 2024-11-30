@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import photo from "../../assets/photo.jpg";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const SideBar = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    tokenChecked();
+  }, []);
+
+  const tokenChecked = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return setUsername("Anonymous");
+    const decode = jwtDecode(token);
+    setUsername(decode.username);
+  };
+
+  const LogOut = async () => {
+    try {
+      localStorage.removeItem("token");
+      await axios.delete(`${process.env.REACT_APP_URL}/auth/logout`);
+      navigate("/login");
+    } catch (e) {
+      alert(e.response.data.msg);
+    }
+  };
+
   return (
     <>
       <div className="sidebar-container">
         <div className="header-sidebar">
           <img src={photo} alt="" />
-          <p>Name</p>
+          <h4>{username}</h4>
           <div>
             <div>
               <p>100</p>
@@ -17,7 +44,7 @@ const SideBar = () => {
           </div>
         </div>
         <div className="link-sidebar">
-          <Link className="link">
+          <Link to={"/"} className="link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -30,7 +57,7 @@ const SideBar = () => {
             </svg>
             <p>Feed</p>
           </Link>
-          <Link className="link">
+          <Link to={"/"} className="link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -43,7 +70,7 @@ const SideBar = () => {
             </svg>
             <p>Explore</p>
           </Link>
-          <Link className="link">
+          <Link to={"/"} className="link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -56,7 +83,7 @@ const SideBar = () => {
             </svg>
             <p>My Favorite</p>
           </Link>
-          <Link className="link">
+          <Link to={"/"} className="link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -71,7 +98,7 @@ const SideBar = () => {
           </Link>
         </div>
         <div className="cta-sidebar">
-          <button>Logout</button>
+          <button onClick={LogOut}>Logout</button>
         </div>
       </div>
     </>

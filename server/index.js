@@ -9,6 +9,7 @@ import upload from "./multer.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { verifyToken } from "./middleware/verifyToken.js";
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,10 @@ app.use(
   })
 );
 app.use(express.json());
+
+app.get("/verify-token", verifyToken, (req, res) => {
+  res.json({ valid: true });
+});
 
 app.use(AuthRoute);
 app.use(PostsRoute);

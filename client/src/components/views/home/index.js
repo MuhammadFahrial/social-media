@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import icon from "../../../assets/icon.png";
 import avatar1 from "../../../assets/avatar1.png";
-import avatar2 from "../../../assets/avatar2.png";
 import avatar3 from "../../../assets/avatar3.png";
 import commentIcon from "../../../assets/comment.png";
 import Layout from "../../template";
@@ -11,17 +9,37 @@ import Layout from "../../template";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [textPosts, setTextPosts] = useState("");
-  const [textComments, setTextComments] = useState("");
+  const [comments, setComments] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
+    checkValidation();
     getPost();
   }, []);
+
+  const checkValidation = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/login");
+
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/verify-token`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data.valid;
+    } catch (error) {
+      console.log(error.response.data.msg);
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+  };
 
   const getPost = async () => {
     const response = await axios.get(`${process.env.REACT_APP_URL}/v1/posts`);
     setPosts(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
   const addPost = async (e) => {
@@ -46,36 +64,57 @@ const Home = () => {
         }
       );
       console.log("upload success");
+      getPost();
+      setTextPosts("");
     } catch (error) {
       console.log(error.response.data.msg);
     }
   };
 
-  // const addComment = async (postId) => {
-  //   const token = localStorage.getItem("token");
+  const handleCommentChange = (postId, value) => {
+    setComments((prev) => ({
+      ...prev,
+      [postId]: value, // Update komentar untuk post tertentu
+    }));
+  };
 
-  //   if (!token) {
-  //     alert("You are not logged in");
-  //     return navigate("/login");
-  //   }
+  const addComment = async (postId, e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
 
-  //   try {
-  //     await axios.post(
-  //       `${process.env.REACT_APP_URL}v1/comments/${postId}`,
-  //       {
-  //         body: textComments,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     console.log("comment uploaded");
-  //   } catch (error) {
-  //     console.log(error.response.data.msg);
-  //   }
-  // };
+    if (!token) {
+      alert("You are not logged in");
+      return navigate("/login");
+    }
+
+    const comment = comments[postId]?.trim();
+    if (!comment) {
+      alert("Comment cannot be empty!");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_URL}/v1/comments/${postId}`,
+        {
+          body: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("comment uploaded");
+      setComments((prev) => ({
+        ...prev,
+        [postId]: "", // Reset komentar untuk post yang bersangkutan
+      }));
+      getPost(); // Refresh post untuk memuat komentar terbaru
+    } catch (error) {
+      console.log(error.response?.data?.msg);
+    }
+  };
 
   return (
     <Layout>
@@ -89,6 +128,7 @@ const Home = () => {
               placeholder="What's on your mind"
               value={textPosts}
               onChange={(e) => setTextPosts(e.target.value)}
+              required
             />
             <div>
               <button className="form-btn">Post</button>
@@ -130,14 +170,19 @@ const Home = () => {
             {/* Form Add Comment */}
             <div className="form-comment">
               <img className="post-img" src={avatar3} alt="" />
-              <form className="form-input-comment">
+              <form
+                onSubmit={(e) => addComment(post._id, e)}
+                className="form-input-comment"
+              >
                 <input
                   type="text"
                   name="comment"
                   id="comment"
                   placeholder="Write your comment"
-                  value={textComments}
-                  // onChange={(e) => setTextComments(e.target.value)}
+                  value={comments[post._id] || ""} // Mengikat komentar ke post tertentu
+                  onChange={(e) =>
+                    handleCommentChange(post._id, e.target.value)
+                  }
                 />
                 <button>Send</button>
               </form>
