@@ -10,6 +10,7 @@ export const verifyToken = (req, res, next) => {
     req.userId = decoded.id;
     req.username = decoded.username;
     req.role = decoded.role;
+    req.image = decoded.image;
     next();
   });
 };

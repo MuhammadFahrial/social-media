@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import AuthRoute from "./routes/AuthRoutes.js";
 import PostsRoute from "./routes/PostsRoutes.js";
 import CommentsRoute from "./routes/CommentRoutes.js";
-import upload from "./multer.js";
+// import upload from "./multer.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -37,17 +37,17 @@ app.use(PostsRoute);
 app.use(CommentsRoute);
 
 // Route handle image upload
-app.post("/image-upload", upload.single("image"), async (req, res) => {
-  try {
-    if (!req.file) {
-      res.status(400).json({ error: true, message: "No image uploaded" });
-    }
-    const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
-    res.status(201).json({ imageUrl });
-  } catch (error) {
-    res.status(500).json({ error: true, message: error.message });
-  }
-});
+// app.post("/image-upload", upload.single("image"), async (req, res) => {
+//   try {
+//     if (!req.file) {
+//       res.status(400).json({ error: true, message: "No image uploaded" });
+//     }
+//     const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
+//     res.status(201).json({ imageUrl });
+//   } catch (error) {
+//     res.status(500).json({ error: true, message: error.message });
+//   }
+// });
 
 // Delete an image from uploads
 app.delete("/delete-image", async (req, res) => {

@@ -8,9 +8,9 @@ const Posts = new Schema({
     ref: "Users",
     required: true,
   },
-  author: { type: String, required: true },
+  author: [{ type: String }],
+  image: { type: String },
   body: { type: String, required: true },
-  imageUrl: { type: String },
   date: { type: Date, default: Date.now },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
 });

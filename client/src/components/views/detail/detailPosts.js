@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Layout from "../../template";
-import avatar3 from "../../../assets/avatar3.png";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const DetailPosts = () => {
   const [author, setAuthor] = useState("");
+  const [imageAuthor, setImageAuthor] = useState("");
   const [body, setBody] = useState("");
   const [comments, setComments] = useState([]);
+  const [imageComments, setImageComments] = useState("");
   const [textComment, setTextComment] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -21,6 +23,10 @@ const DetailPosts = () => {
 
   const checkValidation = async () => {
     const token = localStorage.getItem("token");
+
+    const decode = jwtDecode(token);
+    setImageComments(decode.image);
+
     if (!token) return navigate("/login");
 
     try {
@@ -43,6 +49,7 @@ const DetailPosts = () => {
       `${process.env.REACT_APP_URL}/v1/posts/${id}`
     );
     setAuthor(response.data.author);
+    setImageAuthor(response.data.image);
     setBody(response.data.body);
   };
 
@@ -85,12 +92,15 @@ const DetailPosts = () => {
   return (
     <Layout>
       <div className="post-style main-conten">
-        <h1>{author}</h1>
+        <div className="post-header">
+          <img src={imageAuthor} alt="" className="post-img-detail" />
+          <h1>{author}</h1>
+        </div>
         <p>{body}</p>
 
         {/* Form Add Comment */}
         <div className="form-comment">
-          <img className="post-img" src={avatar3} alt="" />
+          <img className="post-img" src={imageComments} alt="" />
           <form
             onSubmit={(e) => addComment(id, e)}
             className="form-input-comment"
@@ -110,7 +120,7 @@ const DetailPosts = () => {
         <div>
           {comments.map((comment, index) => (
             <div key={index} className="comment">
-              <img src={avatar3} alt="" />
+              <img src={comment.image} alt="" />
               <div className="comment-text">
                 <p className="comment-author">{comment.author}</p>
                 <p className="comment-body">{comment.body}</p>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import avatar1 from "../../../assets/avatar1.png";
-import avatar3 from "../../../assets/avatar3.png";
+import { jwtDecode } from "jwt-decode";
 import commentIcon from "../../../assets/comment.png";
 import Layout from "../../template";
 
@@ -10,6 +9,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [textPosts, setTextPosts] = useState("");
   const [comments, setComments] = useState({});
+  const [imageComments, setImageComments] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +19,10 @@ const Home = () => {
 
   const checkValidation = async () => {
     const token = localStorage.getItem("token");
+
+    const decode = jwtDecode(token);
+    setImageComments(decode.image);
+
     if (!token) return navigate("/login");
 
     try {
@@ -141,7 +145,7 @@ const Home = () => {
         {posts.map((post, index) => (
           <div className="post-style" key={index}>
             <div className="post-header">
-              <img className="post-img" src={avatar1} alt="" />
+              <img className="post-img" src={post.image} alt="" />
               <p className="post-author">{post.author}</p>
             </div>
             <div>
@@ -169,7 +173,7 @@ const Home = () => {
 
             {/* Form Add Comment */}
             <div className="form-comment">
-              <img className="post-img" src={avatar3} alt="" />
+              <img className="post-img" src={imageComments} alt="" />
               <form
                 onSubmit={(e) => addComment(post._id, e)}
                 className="form-input-comment"

@@ -36,6 +36,7 @@ export const createComments = async (req, res) => {
     const comments = await Comments.create({
       body,
       author: req.username,
+      image: req.image,
       postId: req.params.id,
       userId: req.userId,
     });

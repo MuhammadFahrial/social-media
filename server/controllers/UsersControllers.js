@@ -1,9 +1,18 @@
 import Users from "../models/UsersModels.js";
 import jwt from "jsonwebtoken";
 import argon2 from "argon2";
+import dotenv from "dotenv";
+
+dotenv.config();
+const port = process.env.PORT;
 
 export const Register = async (req, res) => {
   const { username, email, password, confPassword } = req.body;
+
+  if (!req.file) {
+    res.status(400).json({ error: true, message: "No image uploaded" });
+  }
+  const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
 
   const usernameCheck = await Users.findOne({ username: username });
   if (usernameCheck)
@@ -35,6 +44,7 @@ export const Register = async (req, res) => {
       email: email,
       password: hashPassword,
       role: role,
+      image: imageUrl,
     });
     res.status(201).json({ msg: "Registration success" });
   } catch (error) {
@@ -63,6 +73,7 @@ export const Login = async (req, res) => {
         id: user.id,
         username: user.username,
         role: user.role,
+        image: user.image,
       },
       process.env.JWT_SECRET,
       {
@@ -86,7 +97,7 @@ export const Logout = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const response = await Users.find().select("username");
+    const response = await Users.find().select("username image");
     res.status(200).json(response);
   } catch (error) {
     console.log(error.message);

@@ -4,7 +4,7 @@ import Comments from "../models/CommentsModels.js";
 export const getPosts = async (req, res) => {
   try {
     const post = await Posts.find()
-      .select("author body imageUrl comments")
+      .select("author image body  comments")
       .populate({
         path: "comments",
         select: "body author",
@@ -27,7 +27,7 @@ export const getPostsById = async (req, res) => {
 };
 
 export const createPosts = async (req, res) => {
-  const { body, imageUrl } = req.body;
+  const { body } = req.body;
 
   if (!body || body.trim().length < 1)
     return res.status(400).json({ msg: "Cannot send this post" });
@@ -36,8 +36,8 @@ export const createPosts = async (req, res) => {
     await Posts.create({
       userId: req.userId,
       author: req.username,
+      image: req.image,
       body,
-      imageUrl,
     });
 
     res.status(201).json({ msg: "Post uploaded" });
