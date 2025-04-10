@@ -8,19 +8,35 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState("");
 
   const navigate = useNavigate();
 
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+    setPreview(URL.createObjectURL(image));
+  };
+
   const Regist = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("confPassword", confPassword);
+    formData.append("file", file);
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/auth/register`,
+        formData,
         {
-          username: username,
-          email: email,
-          password: password,
-          confPassword: confPassword,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
       alert(response.data.msg);
@@ -34,8 +50,18 @@ function Register() {
     <>
       <div className="container">
         <div className="wrapper">
-          <form onSubmit={Regist} className="form-register">
+          <form
+            onSubmit={Regist}
+            className="form-register"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <h1>Register</h1>
+            <div className="textfield-username">
+              <label htmlFor="image">Profile Image</label>
+              <input type="file" name="image" id="image" onChange={loadImage} />
+            </div>
+
             <div className="textfield-username">
               <label htmlFor="username">Username</label>
               <input
