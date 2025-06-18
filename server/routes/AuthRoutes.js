@@ -7,7 +7,7 @@ import {
   getUsersById,
   getUsersByUsername,
 } from "../controllers/UsersControllers.js";
-import upload from "../multer.js";
+import upload from "../config/multer.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();

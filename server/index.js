@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import AuthRoute from "./routes/AuthRoutes.js";
 import PostsRoute from "./routes/PostsRoutes.js";
 import CommentsRoute from "./routes/CommentRoutes.js";
-// import upload from "./multer.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";

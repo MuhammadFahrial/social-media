@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import photo from "../../assets/photo.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
