@@ -114,6 +114,15 @@ html {
   transition-duration: 0.4s;
 }
 
+.btn-demo {
+  padding: 1rem;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  background-color: #04aa6d;
+  color: white;
+}
+
 .action-btn {
   display: flex;
   justify-content: center;

@@ -19,6 +19,7 @@ const SideBar = () => {
     const decode = jwtDecode(token);
     setUsername(decode.username);
     setImage(decode.image);
+    console.log(decode);
   };
 
   const LogOut = async () => {
@@ -37,12 +38,12 @@ const SideBar = () => {
         <div className="header-sidebar">
           <img src={image} alt="" />
           <h4>{username}</h4>
-          <div>
+          {/* <div>
             <div>
               <p>100</p>
               <p>POSTS</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="link-sidebar">
           <Link to={"/"} className="link">

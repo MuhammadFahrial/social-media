@@ -19,11 +19,10 @@ const Home = () => {
 
   const checkValidation = async () => {
     const token = localStorage.getItem("token");
+    if (!token) return navigate("/login");
 
     const decode = jwtDecode(token);
     setImageComments(decode.image);
-
-    if (!token) return navigate("/login");
 
     try {
       const response = await axios.get(
