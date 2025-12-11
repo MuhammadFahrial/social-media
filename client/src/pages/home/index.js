@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import commentIcon from "../../../assets/comment.png";
-import Layout from "../../template";
+import commentIcon from "assets/comment.png";
+import Layout from "layout/Layout";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);

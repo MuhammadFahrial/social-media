@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../header";
-import SideBar from "../sidebar";
-import Info from "../info";
+import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
+import Info from "../components/Info";
 
 const Layout = ({ children }) => {
   return (

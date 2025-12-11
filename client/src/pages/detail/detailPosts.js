@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Layout from "../../template";
+import Layout from "layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
