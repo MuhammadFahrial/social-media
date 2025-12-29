@@ -18,9 +18,11 @@ const port = process.env.PORT;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const clientUrl = process.env.CLIENT_URL || "http://localhost:3000";
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: clientUrl,
     methods: "GET, POST, PATCH, DELETE",
     credentials: true,
   })

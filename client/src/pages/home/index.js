@@ -5,6 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import commentIcon from "assets/comment.png";
 import Layout from "layout/Layout";
 
+import { getPost, verifyToken } from "lib/utils";
+
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [textPosts, setTextPosts] = useState("");
@@ -14,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     checkValidation();
-    getPost();
+    getPost(setPosts);
   }, []);
 
   const checkValidation = async () => {
@@ -24,25 +26,10 @@ const Home = () => {
     const decode = jwtDecode(token);
     setImageComments(decode.image);
 
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/verify-token`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      return response.data.valid;
-    } catch (error) {
-      console.log(error.response.data.msg);
+    if (verifyToken(token) === false) {
       localStorage.removeItem("token");
-      navigate("/login");
+      return navigate("/login");
     }
-  };
-
-  const getPost = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_URL}/v1/posts`);
-    setPosts(response.data);
-    // console.log(response.data);
   };
 
   const addPost = async (e) => {
@@ -67,7 +54,7 @@ const Home = () => {
         }
       );
       console.log("upload success");
-      getPost();
+      getPost(setPosts);
       setTextPosts("");
     } catch (error) {
       console.log(error.response.data.msg);
@@ -113,7 +100,7 @@ const Home = () => {
         ...prev,
         [postId]: "", // Reset komentar untuk post yang bersangkutan
       }));
-      getPost(); // Refresh post untuk memuat komentar terbaru
+      getPost(setPosts); // Refresh post untuk memuat komentar terbaru
     } catch (error) {
       console.log(error.response?.data?.msg);
     }

@@ -2,6 +2,7 @@ import Users from "../models/UsersModels.js";
 import jwt from "jsonwebtoken";
 import argon2 from "argon2";
 import dotenv from "dotenv";
+import { uploadToCloudinary } from "../lib/helper.js";
 
 dotenv.config();
 const port = process.env.PORT;
@@ -9,10 +10,19 @@ const port = process.env.PORT;
 export const Register = async (req, res) => {
   const { username, email, password, confPassword } = req.body;
 
-  if (!req.file) {
-    res.status(400).json({ error: true, message: "No image uploaded" });
+  // if (!req.file) {
+  //   res.status(400).json({ error: true, message: "No image uploaded" });
+  // }
+  // const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
+
+  let picturePath = "";
+
+  if (req.file) {
+    // PROSES UPLOAD KE CLOUDINARY
+    const result = await uploadToCloudinary(req.file.buffer);
+    // Simpan URL dari Cloudinary (contoh: https://res.cloudinary.com/...)
+    picturePath = result.secure_url;
   }
-  const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
 
   const usernameCheck = await Users.findOne({ username: username });
   if (usernameCheck)
@@ -44,7 +54,7 @@ export const Register = async (req, res) => {
       email: email,
       password: hashPassword,
       role: role,
-      image: imageUrl,
+      image: picturePath,
     });
     res.status(201).json({ msg: "Registration success" });
   } catch (error) {

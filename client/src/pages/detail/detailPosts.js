@@ -5,6 +5,8 @@ import Layout from "layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
+import { verifyToken } from "lib/utils";
+
 const DetailPosts = () => {
   const [author, setAuthor] = useState("");
   const [imageAuthor, setImageAuthor] = useState("");
@@ -27,20 +29,9 @@ const DetailPosts = () => {
     const decode = jwtDecode(token);
     setImageComments(decode.image);
 
-    if (!token) return navigate("/login");
-
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/verify-token`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      return response.data.valid;
-    } catch (error) {
-      console.log(error.response.data.msg);
+    if (verifyToken(token) === false) {
       localStorage.removeItem("token");
-      navigate("/login");
+      return navigate("/login");
     }
   };
 

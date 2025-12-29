@@ -32,12 +32,7 @@ function Register() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/auth/register`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
       alert(response.data.msg);
       navigate("/login");
