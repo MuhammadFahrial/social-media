@@ -424,6 +424,10 @@ html {
     /* margin-bottom: -10px; */
   }
 
+  .image {
+    display: none;
+  }
+
   .sidebar-container {
     display: flex;
     flex-direction: row;
