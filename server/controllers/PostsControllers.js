@@ -67,11 +67,11 @@ export const deletePosts = async (req, res) => {
   try {
     const post = await Posts.findById(req.params.id);
     if (!post) return res.status(404).json({ msg: "Post not found" });
-    if (req.role != "admin") {
-      if (post.userId.toString() != req.userId) {
-        return res.sendStatus(403);
-      }
-    }
+    // if (req.role != "admin") {
+    //   if (post.userId.toString() != req.userId) {
+    //     return res.sendStatus(403);
+    //   }
+    // }
 
     await Posts.findByIdAndDelete(req.params.id);
     await Comments.deleteMany({ postId: req.params.id });

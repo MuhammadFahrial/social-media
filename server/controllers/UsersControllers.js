@@ -139,3 +139,13 @@ export const getUsersByUsername = async (req, res) => {
     res.status(500).json({ msg: "Error fetching users", error: error.message });
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const users = await Users.findByIdAndDelete(req.params.id);
+    if (!users) return res.status(404).json({ msg: "User not found" });
+    res.status(200).json({ msg: "User Deleted" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
