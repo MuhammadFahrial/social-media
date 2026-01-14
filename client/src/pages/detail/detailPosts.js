@@ -82,43 +82,49 @@ const DetailPosts = () => {
 
   return (
     <Layout>
-      <div className="post-style main-conten">
-        <div className="post-header">
-          <img src={imageAuthor} alt="" className="post-img-detail" />
-          <h1>{author}</h1>
-        </div>
-        <p>{body}</p>
-
-        {/* Form Add Comment */}
-        <div className="form-comment">
-          <img className="post-img" src={imageComments} alt="" />
-          <form
-            onSubmit={(e) => addComment(id, e)}
-            className="form-input-comment"
-          >
-            <input
-              type="text"
-              name="comment"
-              id="comment"
-              placeholder="Write your comment"
-              value={textComment} // Mengikat komentar ke post tertentu
-              onChange={(e) => setTextComment(e.target.value)}
+      <div className="post-content">
+        <div className="post-style ">
+          <div className="post-header">
+            <img
+              src={imageAuthor}
+              alt=""
+              className="post-img-detail "
             />
-            <button>Send</button>
-          </form>
-        </div>
+            <h1>{author}</h1>
+          </div>
+          <p>{body}</p>
 
-        <div>
-          {comments.map((comment, index) => (
-            <div key={index} className="comment">
-              <img src={comment.image} alt="" />
-              <div className="comment-text">
-                <p className="comment-author">{comment.author}</p>
-                <p className="comment-body">{comment.body}</p>
+          {/* Form Add Comment */}
+          <div className="form-comment">
+            <img className="post-img" src={imageComments} alt="" />
+            <form
+              onSubmit={(e) => addComment(id, e)}
+              className="form-input-comment"
+            >
+              <input
+                type="text"
+                name="comment"
+                id="comment"
+                placeholder="Write your comment"
+                value={textComment} // Mengikat komentar ke post tertentu
+                onChange={(e) => setTextComment(e.target.value)}
+              />
+              <button>Send</button>
+            </form>
+          </div>
+
+          <div>
+            {comments.map((comment, index) => (
+              <div key={index} className="comment">
+                <img src={comment.image} alt="" />
+                <div className="comment-text">
+                  <p className="comment-author">{comment.author}</p>
+                  <p className="comment-body">{comment.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </div>{" "}
       </div>
     </Layout>
   );

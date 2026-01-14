@@ -428,6 +428,12 @@ html {
     display: none;
   }
 
+  .post-img-detail {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 6px;
+  }
+
   .sidebar-container {
     display: flex;
     flex-direction: row;
@@ -488,7 +494,7 @@ html {
   /* END SIDEBAR */
 
   .post-content {
-    height: 100%;
+    height: 100vh;
   }
 
   .home {
