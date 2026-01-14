@@ -85,11 +85,7 @@ const DetailPosts = () => {
       <div className="post-content">
         <div className="post-style ">
           <div className="post-header">
-            <img
-              src={imageAuthor}
-              alt=""
-              className="post-img-detail "
-            />
+            <img src={imageAuthor} alt="" className="post-img-detail " />
             <h1>{author}</h1>
           </div>
           <p>{body}</p>
@@ -116,7 +112,7 @@ const DetailPosts = () => {
           <div>
             {comments.map((comment, index) => (
               <div key={index} className="comment">
-                <img src={comment.image} alt="" />
+                <img src={comment.image} alt="" className="post-img" />
                 <div className="comment-text">
                   <p className="comment-author">{comment.author}</p>
                   <p className="comment-body">{comment.body}</p>
