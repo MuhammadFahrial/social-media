@@ -487,6 +487,10 @@ html {
 
   /* END SIDEBAR */
 
+  .post-content {
+    height: 100%;
+  }
+
   .home {
     /* position: relative; */
     display: flex;
