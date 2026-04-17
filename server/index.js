@@ -25,7 +25,7 @@ app.use(
     origin: clientUrl,
     methods: "GET, POST, PATCH, DELETE",
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 

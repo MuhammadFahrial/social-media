@@ -5,9 +5,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --testEnvironment node",
     "start": "nodemon index.js",
     "vercel-start": "node index.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
   },
   "keywords": [],
   "author": "",
@@ -21,5 +25,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "fast-check": "^4.6.0",
+    "jest": "^30.3.0"
   }
 }
