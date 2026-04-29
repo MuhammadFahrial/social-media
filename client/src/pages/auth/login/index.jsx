@@ -17,7 +17,7 @@ const Login = () => {
         {
           email: email,
           password: password,
-        }
+        },
       );
       localStorage.setItem("token", response.data.accessToken);
       alert("Login Success");
